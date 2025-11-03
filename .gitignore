@@ -1,0 +1,21 @@
+# --- Security ---
+# Ignore the environment file with our passwords
+.env
+
+# --- Python ---
+# Ignore the entire virtual environment folder
+venv/
+
+# Ignore Python cache files
+__pycache__/
+
+# --- macOS ---
+.DS_Store
+
+# --- Data ---
+# Ignore CSV files. Your raw data and generated batches
+# should not be stored in Git.
+*.csv
+
+# --- VS Code ---
+.vscode/
