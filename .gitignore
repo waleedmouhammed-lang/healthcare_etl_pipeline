@@ -4,7 +4,7 @@
 
 # --- Python ---
 # Ignore the entire virtual environment folder
-venv/
+hca-venv/
 
 # Ignore Python cache files
 __pycache__/
