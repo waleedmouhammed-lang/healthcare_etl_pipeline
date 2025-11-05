@@ -1,0 +1,38 @@
+name: Generate and Push Daily Data
+
+# This controls *when* the job runs
+on:
+  schedule:
+    # Runs "at 05:00 UTC every day" (you can change this)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    # Adds a button to run it manually from the "Actions" tab
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 1. Check out repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # ...
+      - name: 3. Install Python dependencies
+        run: |
+          # Install the new driver
+          pip install pandas sqlalchemy psycopg2-binary python-dotenv
+          
+      - name: 4. Create .env file for the script
+        run: |
+          # Use the new single secret
+          echo "NEON_DATABASE_URL=${{ secrets.NEON_DATABASE_URL }}" >> .env
+      # ...
+
+      - name: 5. Run the Data Generation Script
+        # We will create this new script in the next step
+        run: python generate_and_push_data.py
