@@ -94,9 +94,9 @@ def load_to_staging(df, db_engine):
     try:
         with db_engine.connect() as conn:
             with conn.begin():
-                conn.execute(text("TRUNCATE TABLE Staging_Admissions;"))
+                #conn.execute(text("TRUNCATE TABLE Staging_Admissions;"))
                 # Load the cleaned dataframe
-                df.to_sql('Staging_Admissions', con=conn, if_exists='append', index=False)
+                df.to_sql('Staging_Admissions', con=conn, if_exists='replace', index=False)
         print("Staging load complete.")
     except Exception as e:
         print(f"Error loading to staging: {e}")
